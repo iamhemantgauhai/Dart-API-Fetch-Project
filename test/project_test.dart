@@ -1,12 +1,16 @@
-import 'package:flutter_test/flutter_test.dart';
+// ignore_for_file: avoid_print
 
-import 'package:project/project.dart';
+import 'dart:io';
+import 'dart:convert';
+void main() async {
+  
+  var request = await HttpClient().getUrl(Uri.parse('https://reqres.in/api/users=2'));
+  // var request = await HttpClient().getUrl(Uri.parse('http://saloonapi.vfastdelivery.in/Api/Rebliss/ResturantName/1'));
+  
+  var response = await request.close(); 
+  
+  await for (var contents in response.transform(const Utf8Decoder())) {
+    print(contents);
 
-void main() {
-  test('adds one to input values', () {
-    final calculator = Calculator();
-    expect(calculator.addOne(2), 3);
-    expect(calculator.addOne(-7), -6);
-    expect(calculator.addOne(0), 1);
-  });
+  }
 }
